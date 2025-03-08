@@ -1,10 +1,25 @@
+import styles from "./SubTask.module.css"
+
 const SubTask = ({ subTaskData }) => {
-  const { title, completed } = subTaskData
-  console.log(subTaskData)
+  const { task, completed } = subTaskData
+
+  const handleComplete = (e) => {
+    e.stopPropagation()
+    console.log("Done button pressed")
+  }
+
+  const handleRemove = (e) => {
+    e.stopPropagation()
+    console.log("Done button pressed")
+  }
+
   return (
-    <li>
-      <h3>{title}</h3>
-      <p>Completed? {completed ? "Yes" : "No"}</p>
+    <li className={styles.subTask}>
+      <p>- {task}</p>
+      <div className={styles.buttonDiv}>
+        <button onClick={(e) => handleComplete(e)}>Done</button>
+        <button onClick={(e) => handleRemove(e)}>Remove</button>
+      </div>
     </li>
   )
 }

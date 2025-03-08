@@ -1,0 +1,101 @@
+.task {
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* background-color: #f4f3f3cf; */
+  cursor: pointer;
+}
+
+button {
+  background-color: rgba(198, 197, 197, 0.708);
+  border-radius: 3px;
+  border-style: none;
+  padding: 0.2rem;
+}
+
+button:hover {
+  background-color: rgba(170, 169, 169, 0.494);
+  cursor: pointer;
+}
+
+.highPriority {
+  background-color: #ffcccc; /* Darker red background for high priority */
+}
+
+.highPriority:hover {
+  background-color: #f9b9b9; /* Darker red background for high priority */
+}
+
+.mediumPriority {
+  background-color: #ffebcc; /* Orange background for medium priority */
+}
+
+.mediumPriority:hover {
+  background-color: #fbe2bf; /* Orange background for medium priority */
+}
+
+.lowPriority {
+  background-color: #ccffcc; /* Green background for low priority */
+}
+
+.lowPriority:hover {
+  background-color: #bcf9bc; /* Green background for low priority */
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.headerContent h2 {
+  font-size: 0.8rem;
+  margin: 0.2rem 0 0.1rem 1rem;
+}
+
+.headerContent p {
+  margin-left: 2rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.7rem;
+}
+
+.headerContent button {
+  margin: 0.2rem 0.2rem 0.2rem 0; /* Corrected margin syntax */
+  max-height: fit-content;
+  padding: 0.1rem 0.5rem; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem; /* Adjust font size to make the button smaller */
+  width: auto; /* Ensure the button width is auto */
+}
+
+.textContent {
+  margin: 0.5rem 0 0 1rem;
+  font-size: 0.7em;
+}
+
+.subTaskDiv {
+  margin-top: 0rem;
+}
+
+.subTaskDiv button {
+  margin: 0.3rem 0 0.3rem 0;
+  min-width: fit-content;
+  max-width: 2rem;
+}
+
+.dateDiv {
+  display: flex;
+  justify-content: space-evenly;
+  /* margin: 0.3rem 0 0.3rem 0; */
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: grey;
+}
+
+p {
+  margin: 0;
+}
+
+ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}

@@ -1,15 +1,10 @@
 import TaskList from "../components/TaskList"
+import styles from "./App.module.css"
 
 const App = () => {
-  // const handleClick = () => {
-  //   taskService.fetchTasks()
-  // }
-
   return (
-    <div>
-      {/* <div>
-        <button onClick={handleClick}>SEND</button>
-      </div> */}
+    <div className={styles.app}>
+      <h1>ToDo App</h1>
       <TaskList />
     </div>
   )

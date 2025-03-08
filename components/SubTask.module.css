@@ -1,0 +1,25 @@
+.subTask {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* border-bottom: 1px solid black; */
+  list-style: none;
+  border-radius: 3px;
+}
+
+.subTask:hover {
+  background-color: rgba(255, 255, 255, 0.161);
+}
+
+.buttonDiv {
+  display: flex;
+  gap: 0.3rem;
+}
+
+button {
+  margin: 0.2rem 0.2rem 0.2rem 0; /* Corrected margin syntax */
+  height: auto;
+  padding: 0.1rem 0.5rem; /* Adjust padding to make the button smaller */
+  font-size: 0.8rem; /* Adjust font size to make the button smaller */
+  width: auto; /* Ensure the button width is auto */
+}
