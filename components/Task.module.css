@@ -14,37 +14,14 @@ button {
 }
 
 button:hover {
-  background-color: rgba(170, 169, 169, 0.494);
+  background-color: rgba(255, 0, 0, 0.494);
   cursor: pointer;
-}
-
-.highPriority {
-  background-color: #ffcccc; /* Darker red background for high priority */
-}
-
-.highPriority:hover {
-  background-color: #f9b9b9; /* Darker red background for high priority */
-}
-
-.mediumPriority {
-  background-color: #ffebcc; /* Orange background for medium priority */
-}
-
-.mediumPriority:hover {
-  background-color: #fbe2bf; /* Orange background for medium priority */
-}
-
-.lowPriority {
-  background-color: #ccffcc; /* Green background for low priority */
-}
-
-.lowPriority:hover {
-  background-color: #bcf9bc; /* Green background for low priority */
 }
 
 .headerContent {
   display: flex;
   justify-content: space-between;
+  min-height: 2.3rem;
 }
 
 .headerContent h2 {
@@ -98,4 +75,42 @@ ul {
   display: flex;
   flex-direction: column;
   gap: 0.1rem;
+}
+
+.highPriority {
+  background-color: #ffcccc; /* Darker red background for high priority */
+}
+
+.highPriority:hover {
+  background-color: #f9b9b9; /* Darker red background for high priority */
+}
+
+.mediumPriority {
+  background-color: #ffebcc; /* Orange background for medium priority */
+}
+
+.mediumPriority:hover {
+  background-color: #fbe2bf; /* Orange background for medium priority */
+}
+
+.lowPriority {
+  background-color: #ccffcc; /* Green background for low priority */
+}
+
+.lowPriority:hover {
+  background-color: #bcf9bc; /* Green background for low priority */
+}
+
+.taskCompleted {
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* background-color: #f4f3f3cf; */
+  cursor: pointer;
+  background-color: rgba(0, 113, 4, 0.188);
+}
+
+.taskCompleted h2,
+.taskCompleted p {
+  text-decoration: line-through; /* Add strikethrough to text */
 }

@@ -7,16 +7,14 @@ import TaskForm from "./TaskForm"
 const TaskList = () => {
   const [tasks, setTasks] = useState([])
   const [taskFormVisible, setTaskFormVisible] = useState(false)
+  const [showActive, setShowActive] = useState(true)
 
   //Fetch initial data from database
   useEffect(() => {
     const fetchTasks = async () => {
       try {
         const response = await taskService.fetchTasks()
-        const sortedByPriority = response.sort(
-          (a, b) => a.priority - b.priority
-        )
-        setTasks(sortedByPriority)
+        setTasks(sortTasks(response))
       } catch (error) {
         console.log(error)
       }
@@ -26,13 +24,57 @@ const TaskList = () => {
     fetchTasks()
   }, [])
 
-  const addTask = async () => {}
+  const sortTasks = (tasks) => {
+    const sortedByPriority = tasks.sort((a, b) => a.priority - b.priority)
+    return sortedByPriority
+  }
 
-  const updateTask = async () => {}
+  const handleAddTask = async (task) => {
+    try {
+      const newTask = await taskService.addTask(task)
+      const updatedTasks = [...tasks, newTask]
+      setTasks(sortTasks(updatedTasks))
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  const removeTask = async () => {}
+  const handleUpdateTask = async (task) => {
+    try {
+      const response = await taskService.updateTask(task)
+      const updatedTask = tasks.map((task) =>
+        task.id === response.id ? response : task
+      )
+      setTasks(updatedTask)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
-  const handleNewTaskForm = () => {}
+  const handleRemoveTask = async (id) => {
+    try {
+      await taskService.deleteTask(id)
+      const updatedTasks = tasks.filter((task) => task.id !== id)
+      const filteredTasks = sortTasks(updatedTasks)
+
+      setTasks(filteredTasks)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const handleRemoveSubTask = async (taskId, subTaskId) => {
+    try {
+      const response = await taskService.deleteSubTask(taskId, subTaskId)
+      const updatedTasks = tasks.map((task) =>
+        task.id === taskId ? response : task
+      )
+
+      setTasks(updatedTasks)
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <div className={styles.taskList}>
@@ -40,13 +82,47 @@ const TaskList = () => {
         {!taskFormVisible && (
           <button onClick={() => setTaskFormVisible(true)}>Add task</button>
         )}
-        {taskFormVisible && <TaskForm addTask={addTask} />}
+        {taskFormVisible && (
+          <TaskForm
+            handleAddTask={handleAddTask}
+            setTaskFormVisible={setTaskFormVisible}
+          />
+        )}
       </div>
-
+      <div>
+        <button onClick={() => setShowActive(true)}>Active</button>
+        <button onClick={() => setShowActive(false)}>Completed</button>
+      </div>
       <div className={styles.tasks}>
-        {tasks.map((task) => (
-          <Task taskData={task} key={task.id} />
-        ))}
+        {showActive &&
+          tasks.map((task) =>
+            task.completed === false ? (
+              <Task
+                taskData={task}
+                handleUpdateTask={handleUpdateTask}
+                handleRemoveTask={handleRemoveTask}
+                handleRemoveSubTask={handleRemoveSubTask}
+                key={task.id}
+              />
+            ) : (
+              ""
+            )
+          )}
+
+        {!showActive &&
+          tasks.map((task) =>
+            task.completed === true ? (
+              <Task
+                taskData={task}
+                handleUpdateTask={handleUpdateTask}
+                handleRemoveTask={handleRemoveTask}
+                handleRemoveSubTask={handleRemoveSubTask}
+                key={task.id}
+              />
+            ) : (
+              ""
+            )
+          )}
       </div>
     </div>
   )

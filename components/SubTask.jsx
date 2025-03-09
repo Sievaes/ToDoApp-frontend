@@ -1,24 +1,23 @@
 import styles from "./SubTask.module.css"
 
-const SubTask = ({ subTaskData }) => {
-  const { task, completed } = subTaskData
+const SubTask = ({ subTaskData, taskId, handleRemoveSubTask }) => {
+  const { task, completed, id } = subTaskData
 
   const handleComplete = (e) => {
     e.stopPropagation()
-    console.log("Done button pressed")
   }
 
   const handleRemove = (e) => {
     e.stopPropagation()
-    console.log("Done button pressed")
+    handleRemoveSubTask(taskId, id)
   }
 
   return (
     <li className={styles.subTask}>
       <p>- {task}</p>
       <div className={styles.buttonDiv}>
-        <button onClick={(e) => handleComplete(e)}>Done</button>
-        <button onClick={(e) => handleRemove(e)}>Remove</button>
+        <button onClick={handleComplete}>Completed</button>
+        <button onClick={handleRemove}>Remove</button>
       </div>
     </li>
   )

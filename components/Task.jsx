@@ -2,7 +2,12 @@ import { useState } from "react"
 import SubTask from "./SubTask"
 import styles from "./Task.module.css"
 
-const Task = ({ taskData }) => {
+const Task = ({
+  taskData,
+  handleUpdateTask,
+  handleRemoveTask,
+  handleRemoveSubTask,
+}) => {
   const [visible, setVisible] = useState(false)
 
   const {
@@ -13,6 +18,7 @@ const Task = ({ taskData }) => {
     updatedAt,
     completed,
     subTasks,
+    id,
   } = taskData
 
   const formattedCreatedAtTime = new Date(createdAt).toLocaleString(undefined, {
@@ -43,9 +49,30 @@ const Task = ({ taskData }) => {
       ? "Low"
       : ""
 
+  const removeTask = (event) => {
+    event.stopPropagation()
+    handleRemoveTask(id)
+  }
+
+  const updateTask = (action, event) => {
+    event.stopPropagation()
+    if (action === "complete") {
+      const updatedTask = {
+        task,
+        description,
+        priority,
+        completed: true,
+        subTasks: subTasks.map((subtask) => ({ ...subtask, completed: true })),
+        id,
+      }
+
+      handleUpdateTask(updatedTask)
+    }
+  }
+
   return (
     <div
-      className={`${styles.task} ${
+      className={`${completed ? styles.taskCompleted : styles.task} ${
         priority === 1
           ? styles.highPriority
           : priority === 2
@@ -61,20 +88,31 @@ const Task = ({ taskData }) => {
           <h2>{task}</h2>
           {description && <p> {description}</p>}
         </div>
-        <button>Remove task</button>
+        <div>
+          {!completed && (
+            <button onClick={(event) => updateTask("complete", event)}>
+              Complete
+            </button>
+          )}
+          <button onClick={removeTask}>Remove</button>
+        </div>
       </div>
 
       <div className={`${visible ? styles.textContent : ""}`}>
         {visible && (
           <div>
             <p>Priority: {priorityLevel}</p>
-            <p>Completed: {completed ? "Yes" : "No"}</p>
 
             <div className={styles.subTaskDiv}>
               {
                 <ul>
                   {subTasks.map((subTask) => (
-                    <SubTask subTaskData={subTask} key={subTask.id} />
+                    <SubTask
+                      subTaskData={subTask}
+                      key={subTask.id}
+                      taskId={id}
+                      handleRemoveSubTask={handleRemoveSubTask}
+                    />
                   ))}
                   <button>+</button>
                 </ul>
