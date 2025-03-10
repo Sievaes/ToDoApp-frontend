@@ -4,8 +4,12 @@ import styles from "./App.module.css"
 const App = () => {
   return (
     <div className={styles.app}>
-      <h1>ToDo App</h1>
-      <TaskList />
+      <div className={styles.headerDiv}>
+        <h1>ToDo App</h1>
+      </div>
+      <div>
+        <TaskList />
+      </div>
     </div>
   )
 }

@@ -1,20 +1,20 @@
 .task {
-  border: 1px solid black;
   border-radius: 3px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* background-color: #f4f3f3cf; */
+  box-shadow: 1px 1px 2px;
   cursor: pointer;
 }
 
-button {
-  background-color: rgba(198, 197, 197, 0.708);
+.task button {
+  background-color: rgba(103, 187, 210, 0.583);
   border-radius: 3px;
   border-style: none;
-  padding: 0.2rem;
+  box-shadow: 1px 1px 2px;
+  margin-right: 0.5rem;
 }
 
-button:hover {
-  background-color: rgba(255, 0, 0, 0.494);
+.task button:hover {
+  background-color: rgba(104, 178, 231, 0.813);
   cursor: pointer;
 }
 
@@ -26,21 +26,28 @@ button:hover {
 
 .headerContent h2 {
   font-size: 0.8rem;
-  margin: 0.2rem 0 0.1rem 1rem;
+  margin: 0.2rem 0 0.2rem 1rem;
 }
 
 .headerContent p {
-  margin-left: 2rem;
+  margin-left: 1.2rem;
   margin-bottom: 0.2rem;
   font-size: 0.7rem;
+  color: rgba(0, 0, 0, 0.816);
 }
 
-.headerContent button {
-  margin: 0.2rem 0.2rem 0.2rem 0; /* Corrected margin syntax */
-  max-height: fit-content;
+.buttonDiv {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: 0.5rem;
+}
+
+.buttonDiv button {
   padding: 0.1rem 0.5rem; /* Adjust padding to make the button smaller */
   font-size: 0.8rem; /* Adjust font size to make the button smaller */
   width: auto; /* Ensure the button width is auto */
+  height: 60%;
 }
 
 .textContent {
@@ -48,33 +55,20 @@ button:hover {
   font-size: 0.7em;
 }
 
-.subTaskDiv {
-  margin-top: 0rem;
-}
-
-.subTaskDiv button {
-  margin: 0.3rem 0 0.3rem 0;
-  min-width: fit-content;
-  max-width: 2rem;
+.subTaskDiv ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .dateDiv {
+  margin: 0.8rem 0 0.2rem 0;
   display: flex;
   justify-content: space-evenly;
-  /* margin: 0.3rem 0 0.3rem 0; */
+
   font-size: 0.7rem;
   font-weight: 300;
   color: grey;
-}
-
-p {
-  margin: 0;
-}
-
-ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
 }
 
 .highPriority {
@@ -102,10 +96,8 @@ ul {
 }
 
 .taskCompleted {
-  border: 1px solid black;
   border-radius: 3px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  /* background-color: #f4f3f3cf; */
+  box-shadow: 1px 1px 2px;
   cursor: pointer;
   background-color: rgba(0, 113, 4, 0.188);
 }
@@ -113,4 +105,8 @@ ul {
 .taskCompleted h2,
 .taskCompleted p {
   text-decoration: line-through; /* Add strikethrough to text */
+}
+
+.taskCompleted:hover {
+  background-color: #16550638;
 }

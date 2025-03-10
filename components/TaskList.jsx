@@ -76,24 +76,42 @@ const TaskList = () => {
     }
   }
 
+  const handleUpdateSubTask = async (taskId, subTaskId) => {
+    try {
+      const response = await taskService.updateSubTask(taskId, subTaskId)
+      const updatedTasks = tasks.map((task) =>
+        task.id === response.id ? response : task
+      )
+      setTasks(updatedTasks)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div className={styles.taskList}>
       <div className={styles.buttonContainer}>
-        {!taskFormVisible && (
-          <button onClick={() => setTaskFormVisible(true)}>Add task</button>
-        )}
-        {taskFormVisible && (
-          <TaskForm
-            handleAddTask={handleAddTask}
-            setTaskFormVisible={setTaskFormVisible}
-          />
-        )}
+        <div className={styles.buttonContainerLeft}>
+          {!taskFormVisible && (
+            <button onClick={() => setTaskFormVisible(true)}>Add task</button>
+          )}
+          {taskFormVisible && (
+            <TaskForm
+              handleAddTask={handleAddTask}
+              setTaskFormVisible={setTaskFormVisible}
+            />
+          )}
+        </div>
+        <div className={styles.buttonContainerCenter}>
+          <button onClick={() => setShowActive(true)}>Active</button>
+          <button onClick={() => setShowActive(false)}>Completed</button>
+        </div>
+        <div className={styles.buttonContainerRight}>
+          <button>Logout</button>
+        </div>
       </div>
-      <div>
-        <button onClick={() => setShowActive(true)}>Active</button>
-        <button onClick={() => setShowActive(false)}>Completed</button>
-      </div>
-      <div className={styles.tasks}>
+
+      <div className={styles.tasksDiv}>
         {showActive &&
           tasks.map((task) =>
             task.completed === false ? (
@@ -102,6 +120,7 @@ const TaskList = () => {
                 handleUpdateTask={handleUpdateTask}
                 handleRemoveTask={handleRemoveTask}
                 handleRemoveSubTask={handleRemoveSubTask}
+                handleUpdateSubTask={handleUpdateSubTask}
                 key={task.id}
               />
             ) : (
@@ -117,6 +136,7 @@ const TaskList = () => {
                 handleUpdateTask={handleUpdateTask}
                 handleRemoveTask={handleRemoveTask}
                 handleRemoveSubTask={handleRemoveSubTask}
+                handleUpdateSubTask={handleUpdateSubTask}
                 key={task.id}
               />
             ) : (

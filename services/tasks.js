@@ -32,9 +32,12 @@ const deleteTask = async (id) => {
 
 //PUT delete subtask
 const deleteSubTask = async (taskId, subTaskId) => {
-  const response = await fetch(`${API_URL}/${taskId}/subtasks/${subTaskId}`, {
-    method: "put",
-  })
+  const response = await fetch(
+    `${API_URL}/${taskId}/subtasks/${subTaskId}/remove`,
+    {
+      method: "put",
+    }
+  )
 
   const data = response.json()
   return data
@@ -51,4 +54,24 @@ const updateTask = async (task) => {
   return data
 }
 
-export default { fetchTasks, addTask, deleteTask, deleteSubTask, updateTask }
+//PUT update subtask
+const updateSubTask = async (taskId, subTaskId) => {
+  const response = await fetch(
+    `${API_URL}/${taskId}/subtasks/${subTaskId}/completed`,
+    {
+      method: "put",
+    }
+  )
+
+  const data = response.json()
+  return data
+}
+
+export default {
+  fetchTasks,
+  addTask,
+  deleteTask,
+  deleteSubTask,
+  updateTask,
+  updateSubTask,
+}

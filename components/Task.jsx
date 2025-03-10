@@ -7,6 +7,7 @@ const Task = ({
   handleUpdateTask,
   handleRemoveTask,
   handleRemoveSubTask,
+  handleUpdateSubTask,
 }) => {
   const [visible, setVisible] = useState(false)
 
@@ -39,15 +40,6 @@ const Task = ({
   const toggleVisible = () => {
     setVisible((current) => !current)
   }
-
-  const priorityLevel =
-    priority === 1
-      ? "High"
-      : priority === 2
-      ? "Medium"
-      : priority === 3
-      ? "Low"
-      : ""
 
   const removeTask = (event) => {
     event.stopPropagation()
@@ -88,7 +80,7 @@ const Task = ({
           <h2>{task}</h2>
           {description && <p> {description}</p>}
         </div>
-        <div>
+        <div className={styles.buttonDiv}>
           {!completed && (
             <button onClick={(event) => updateTask("complete", event)}>
               Complete
@@ -101,8 +93,6 @@ const Task = ({
       <div className={`${visible ? styles.textContent : ""}`}>
         {visible && (
           <div>
-            <p>Priority: {priorityLevel}</p>
-
             <div className={styles.subTaskDiv}>
               {
                 <ul>
@@ -112,9 +102,9 @@ const Task = ({
                       key={subTask.id}
                       taskId={id}
                       handleRemoveSubTask={handleRemoveSubTask}
+                      handleUpdateSubTask={handleUpdateSubTask}
                     />
                   ))}
-                  <button>+</button>
                 </ul>
               }
             </div>
