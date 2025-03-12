@@ -1,5 +1,11 @@
 const API_URL = "api/tasks"
 
+let token = null
+
+const setToken = (newToken) => {
+  token = `Bearer ${newToken}`
+}
+
 //GET get all tasks
 const fetchTasks = async () => {
   const response = await fetch(API_URL)
@@ -15,7 +21,7 @@ const fetchTasks = async () => {
 const addTask = async (newTask) => {
   const response = await fetch(API_URL, {
     method: "post",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify(newTask),
   })
   const data = await response.json()
@@ -74,4 +80,5 @@ export default {
   deleteSubTask,
   updateTask,
   updateSubTask,
+  setToken,
 }

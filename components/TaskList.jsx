@@ -4,7 +4,7 @@ import taskService from "../services/tasks"
 import Task from "./Task"
 import TaskForm from "./TaskForm"
 
-const TaskList = () => {
+const TaskList = ({ handleLogout }) => {
   const [tasks, setTasks] = useState([])
   const [taskFormVisible, setTaskFormVisible] = useState(false)
   const [showActive, setShowActive] = useState(true)
@@ -88,6 +88,10 @@ const TaskList = () => {
     }
   }
 
+  const onLogout = () => {
+    handleLogout()
+  }
+
   return (
     <div className={styles.taskList}>
       <div className={styles.buttonContainer}>
@@ -107,7 +111,7 @@ const TaskList = () => {
           <button onClick={() => setShowActive(false)}>Completed</button>
         </div>
         <div className={styles.buttonContainerRight}>
-          <button>Logout</button>
+          <button onClick={onLogout}>Logout</button>
         </div>
       </div>
 
