@@ -110,8 +110,8 @@ const Task = ({
             </div>
 
             <div className={styles.dateDiv}>
-              <p>Created At: {formattedCreatedAtTime}</p>
-              <p>Updated At: {formattedUpdatedAtTime}</p>
+              <p>Task created: {formattedCreatedAtTime}</p>
+              {/* <p>Updated At: {formattedUpdatedAtTime}</p> */}
             </div>
           </div>
         )}

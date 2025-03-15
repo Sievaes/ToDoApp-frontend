@@ -8,7 +8,10 @@ const setToken = (newToken) => {
 
 //GET get all tasks
 const fetchTasks = async () => {
-  const response = await fetch(API_URL)
+  const response = await fetch(API_URL, {
+    method: "GET",
+    headers: { Authorization: token },
+  })
 
   if (!response.ok) {
     throw new Error("Network response was not ok")
@@ -31,7 +34,13 @@ const addTask = async (newTask) => {
 const deleteTask = async (id) => {
   const response = await fetch(`${API_URL}/${id}`, {
     method: "delete",
+    headers: { Authorization: token },
   })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error)
+  }
 
   return response
 }
@@ -42,10 +51,17 @@ const deleteSubTask = async (taskId, subTaskId) => {
     `${API_URL}/${taskId}/subtasks/${subTaskId}/remove`,
     {
       method: "put",
+      headers: { Authorization: token },
     }
   )
 
-  const data = response.json()
+  if (!response.ok) {
+    const error = await response.json()
+
+    throw new Error(error)
+  }
+
+  const data = await response.json()
   return data
 }
 
@@ -53,10 +69,15 @@ const deleteSubTask = async (taskId, subTaskId) => {
 const updateTask = async (task) => {
   const response = await fetch(`${API_URL}/${task.id}`, {
     method: "put",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", Authorization: token },
     body: JSON.stringify(task),
   })
-  const data = response.json()
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error)
+  }
+  const data = await response.json()
   return data
 }
 
@@ -66,8 +87,14 @@ const updateSubTask = async (taskId, subTaskId) => {
     `${API_URL}/${taskId}/subtasks/${subTaskId}/completed`,
     {
       method: "put",
+      headers: { Authorization: token },
     }
   )
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(error)
+  }
 
   const data = response.json()
   return data

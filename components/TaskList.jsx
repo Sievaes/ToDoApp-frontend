@@ -82,6 +82,7 @@ const TaskList = ({ handleLogout }) => {
       const updatedTasks = tasks.map((task) =>
         task.id === response.id ? response : task
       )
+      console.log(updatedTasks)
       setTasks(updatedTasks)
     } catch (error) {
       console.log(error)

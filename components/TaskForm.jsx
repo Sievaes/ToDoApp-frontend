@@ -32,12 +32,21 @@ const TaskForm = ({ handleAddTask, setTaskFormVisible }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
+    const filteredSubTasks = subTaskInputs.filter((subTask) => subTask === "")
+
     const newTask = {
       task: task,
       description: description,
       priority: priority,
-      subTasks: subTaskInputs,
+      subTasks: filteredSubTasks,
     }
+
+    if (task === "") {
+      setTask("Task required!")
+      setTimeout(() => setTask(""), 3000)
+      return
+    }
+
     setTask("")
     setDescription("")
     setSubTaskInputs([])

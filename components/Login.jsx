@@ -32,6 +32,7 @@ const LoginForm = ({
       }
 
       taskService.setToken(response.token)
+
       setUser(user)
       setUsername("")
       setPassword("")
